@@ -82,7 +82,6 @@ const Main = () => {
     arr[index1] = null;
     arr[index2] = null;
 
-    console.log(arr.filter((element) => element !== undefined));
     return arr.filter((element) => element !== undefined);
   };
 
@@ -90,7 +89,7 @@ const Main = () => {
     const interval = setInterval(() => {
       setHorImages((images) => shuffleArray(images));
       setVerImages((images) => shuffleArray(images));
-    }, 5000);
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 
