@@ -1,0 +1,21 @@
+.header {
+  padding: 40px 0 0 40px;
+
+  &-section {
+    background: #fdfdfd;
+  }
+
+  &__logo {
+    width: 192px;
+  }
+
+  &__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 200;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    display: block;
+    margin-top: -4px;
+  }
+}

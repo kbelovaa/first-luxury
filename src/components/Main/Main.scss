@@ -1,0 +1,274 @@
+.pantone {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  &__square {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #fff;
+  }
+
+  &__info {
+    padding: 10px 10px 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    line-height: normal;
+  }
+
+  &__name {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.24px;
+    margin-bottom: 2px;
+  }
+
+  &__tone {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+}
+
+.show-more {
+  color: #0a81f0;
+  font-family: "Suisse Int'l", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  position: absolute;
+  bottom: 23px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+
+  .expanded & {
+    bottom: -44px;
+  }
+}
+
+.info {
+  padding: 85px 40px 300px;
+  display: flex;
+
+  &-section {
+    background: #fdfdfd;
+  }
+
+  &__img {
+    position: relative;
+    margin-top: 36px;
+
+    & img {
+      width: 538px;
+    }
+  }
+
+  &__wrap {
+    position: relative;
+    padding: 370px 0 0 10px;
+    width: 100%;
+  }
+
+  &__title {
+    color: #0a81f0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 76px;
+    font-weight: 200;
+    line-height: normal;
+    letter-spacing: 1.52px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 140%;
+    letter-spacing: 0.44px;
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &-wrap {
+      max-height: 248px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+
+      &.expanded {
+        max-height: 619px;
+      }
+    }
+  }
+
+  &__img_small {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    & img {
+      width: 310px;
+    }
+  }
+}
+
+.data {
+  padding: 0 40px 50px;
+
+  &-section {
+    background: #fdfdfd;
+  }
+
+  &__line {
+    padding-bottom: 10px;
+    margin-top: 40px;
+    display: flex;
+    align-items: start;
+    position: relative;
+
+    &:first-of-type {
+      margin-top: 0;
+
+      & .data__info {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 40px;
+        font-weight: 300;
+        line-height: 130%;
+        text-transform: uppercase;
+        width: 518px;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #0a81f0;
+    }
+
+    &:last-of-type::after {
+      display: none;
+    }
+  }
+
+  &__label {
+    display: block;
+    width: 538px;
+    margin-right: 10px;
+    color: #0a81f0;
+    font-family: "Suisse Int'l", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+
+  &__info {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 140%;
+  }
+}
+
+.gallery {
+  padding: 0 40px 20px;
+  margin-bottom: 300px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 744px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 40px;
+    bottom: 0;
+    width: calc(100% - 80px);
+    height: 1px;
+    background-color: #0a81f0;
+  }
+
+  &-section {
+    background: #fdfdfd;
+  }
+
+  &__img {
+    width: 264px;
+    margin-bottom: 10px;
+
+    & img {
+      width: 264px;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    &_big {
+      height: 357px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.contact-us {
+  padding: 120px 40px 40px;
+  display: flex;
+
+  &-section {
+    background: linear-gradient(180deg, #0a81f0 11.33%, #5ab0ff 101.15%);
+  }
+
+  &__title {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 200;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  &__form {
+    padding: 174px 0 16px 0;
+    margin-right: 10px;
+    width: 812px;
+  }
+
+  &__btn {
+    margin-top: 40px;
+  }
+
+  &__img {
+    position: relative;
+
+    & img {
+      width: 538px;
+    }
+  }
+}
+
+.footer {
+  padding: 873px 40px 40px;
+  &__text {
+    color: #2f5a8a;
+    font-family: 'SF Pro Display', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    margin-right: 20px;
+
+    &-wrap {
+      margin-top: 10px;
+
+      & .footer__text {
+        cursor: pointer;
+      }
+    }
+  }
+}
