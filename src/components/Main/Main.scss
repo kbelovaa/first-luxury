@@ -204,12 +204,17 @@
 
     & img {
       width: 264px;
-      animation: fadeIn 0.3s ease-in;
+      animation: fadeIn 0.8s ease-in-out;
     }
 
     &_big {
-      height: 357px;
+      width: 538px;
       margin-bottom: 10px;
+
+      & img {
+        width: 538px;
+        animation: fadeIn 0.8s ease-in-out;
+      }
     }
   }
 }

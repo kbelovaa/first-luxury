@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import sendData from '../../http/sendData';
 import img1 from '../../images/image1.png';
 import img2 from '../../images/image2.png';
@@ -39,8 +39,20 @@ const Main = () => {
   const [isTextActive, setIsTextActive] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [horImages, setHorImages] = useState([image1, image8, image9]);
-  const [verImages, setVerImages] = useState([
+  const [choosedHorImage, setChoosedHorImage] = useState(image1);
+  const [choosedVerImages, setChoosedVerImages] = useState([
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+  ]);
+  const [imgIndex, setImgIndex] = useState();
+  const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+
+  const horImages = [image1, image8, image9];
+  const verImages = [
     image2,
     image3,
     image4,
@@ -59,39 +71,56 @@ const Main = () => {
     image19,
     image20,
     image21,
-  ]);
-
-  const shuffleArray = (array) => {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-    }
-    return shuffledArray;
-  };
-
-  const insertNulls = (array) => {
-    const arr = [...array];
-    const index1 = Math.floor(Math.random() * 8) + 1;
-    let index2 = Math.floor(Math.random() * 8) + 1;
-
-    while (Math.abs(index1 - index2) % 2 !== 0 && Math.abs(index1 - index2) === 1) {
-      index2 = Math.floor(Math.random() * 8) + 1;
-    }
-
-    arr[index1] = null;
-    arr[index2] = null;
-
-    return arr.filter((element) => element !== undefined);
-  };
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setHorImages((images) => shuffleArray(images));
-      setVerImages((images) => shuffleArray(images));
-    }, 7000);
+      let randomImgIndex = Math.floor(Math.random() * 7);
+
+      setImgIndex((prevImgIndex) => {
+        while (prevImgIndex === randomImgIndex) {
+          randomImgIndex = Math.floor(Math.random() * 7);
+        }
+        return randomImgIndex;
+      });
+    }, 4000);
+
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (imgIndex === 0) {
+      setChoosedHorImage((prevHorImage) => {
+        let randomHorImgIndex = Math.floor(Math.random() * horImages.length);
+        while (horImages[randomHorImgIndex] === prevHorImage) {
+          randomHorImgIndex = Math.floor(Math.random() * horImages.length);
+        }
+        return horImages[randomHorImgIndex];
+      });
+    } else {
+      setChoosedVerImages((prevVerImages) => {
+        let randomVerImgIndex = Math.floor(Math.random() * verImages.length);
+        while (prevVerImages.includes(verImages[randomVerImgIndex])) {
+          randomVerImgIndex = Math.floor(Math.random() * verImages.length);
+        }
+        const updatedVerImages = [...prevVerImages];
+        updatedVerImages[imgIndex - 1] = verImages[randomVerImgIndex];
+        return updatedVerImages;
+      });
+    }
+  }, [imgIndex]);
+
+  useEffect(() => {
+    if (imgIndex || imgIndex === 0) {
+      const element = refs[imgIndex].current;
+
+      element.classList.add('hidden');
+
+      setTimeout(() => {
+        element.classList.remove('hidden');
+      }, 100);
+    }
+  }, [imgIndex]);
 
   const handleEmailChange = (email) => {
     setEmail(email);
@@ -101,7 +130,7 @@ const Main = () => {
   };
 
   const checkIsFormValid = () => {
-    if (name && email && isEmailValid) {
+    if (name && email && isEmailValid && phone) {
       return true;
     }
 
@@ -240,14 +269,29 @@ const Main = () => {
       <section className="gallery-section">
         <div className="container">
           <div className="gallery">
-            <img className="gallery__img_big" src={horImages[0]} alt="Photo" />
-            {insertNulls(verImages)
-              .slice(0, 8)
-              .map((image, index) => (
-                <div key={index} className="gallery__img">
-                  {image && <img key={index} src={image} alt="Photo" />}
-                </div>
-              ))}
+            <div className="gallery__img_big">
+              <img ref={refs[0]} src={choosedHorImage} alt="Photo" />
+            </div>
+            <div className="gallery__img">
+              <img ref={refs[1]} src={choosedVerImages[0]} alt="Photo" />
+            </div>
+            <div className="gallery__img"></div>
+            <div className="gallery__img">
+              <img ref={refs[2]} src={choosedVerImages[1]} alt="Photo" />
+            </div>
+            <div className="gallery__img">
+              <img ref={refs[3]} src={choosedVerImages[2]} alt="Photo" />
+            </div>
+            <div className="gallery__img"></div>
+            <div className="gallery__img">
+              <img ref={refs[4]} src={choosedVerImages[3]} alt="Photo" />
+            </div>
+            <div className="gallery__img">
+              <img ref={refs[5]} src={choosedVerImages[4]} alt="Photo" />
+            </div>
+            <div className="gallery__img">
+              <img ref={refs[6]} src={choosedVerImages[5]} alt="Photo" />
+            </div>
           </div>
         </div>
       </section>
