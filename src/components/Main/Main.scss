@@ -46,6 +46,31 @@
   .expanded & {
     bottom: -44px;
   }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1.5px;
+    background: transparent;
+    transition: all 0.5s ease;
+  }
+
+  &:hover::after {
+    background-color: #0a81f0;
+  }
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    color: #096ECC;
+
+    &::after {
+      background: transparent;
+    }
+  }
 }
 
 .info {
@@ -227,6 +252,10 @@
     background: linear-gradient(180deg, #0a81f0 11.33%, #5ab0ff 101.15%);
   }
 
+  &__confirmation {
+    padding-top: 338px;
+  }
+
   &__title {
     color: #fff;
     font-family: 'Montserrat', sans-serif;
@@ -239,7 +268,7 @@
   }
 
   &__form {
-    padding: 174px 0 16px 0;
+    padding-top: 185px;
     margin-right: 10px;
     width: 812px;
   }

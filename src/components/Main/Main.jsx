@@ -39,6 +39,7 @@ const Main = () => {
   const [isTextActive, setIsTextActive] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [isFormSended, setIsFormSended] = useState(false);
   const [choosedHorImage, setChoosedHorImage] = useState(image1);
   const [choosedVerImages, setChoosedVerImages] = useState([
     image2,
@@ -152,6 +153,7 @@ const Main = () => {
       const result = await sendData(data);
 
       if (result.status === 200) {
+        setIsFormSended(true);
         setIsFormValid(true);
         setName('');
         setEmail('');
@@ -298,68 +300,77 @@ const Main = () => {
       <section className="contact-us-section">
         <div className="container">
           <div className="contact-us">
-            <div className="contact-us__form">
-              <h2 className="contact-us__title">Contact us</h2>
-              <form className={isFormValid ? '' : 'invalid'} onSubmit={handleFormSubmit}>
-                <div className={`input-wrap ${isNameActive || name ? 'active' : ''}`}>
-                  <input
-                    type="text"
-                    className={`input ${!isFormValid && !name && 'invalid-field'}`}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    onFocus={() => setIsNameActive(true)}
-                    onBlur={() => setIsNameActive(false)}
-                  />
-                  <label className="label">Name</label>
-                </div>
-                <div className={`input-wrap ${isEmailActive || email ? 'active' : ''}`}>
-                  <input
-                    type="text"
-                    className={`input ${!isFormValid && (!email || !isEmailValid) && 'invalid-field'}`}
-                    value={email}
-                    onChange={(e) => handleEmailChange(e.target.value)}
-                    onFocus={() => setIsEmailActive(true)}
-                    onBlur={() => setIsEmailActive(false)}
-                  />
-                  <label className="label">Email</label>
-                  {!isEmailValid && <p className="message">Please enter a valid email address</p>}
-                </div>
-                <div className={`input-wrap ${isPhoneActive || phone ? 'active' : ''}`}>
-                  <input
-                    type="text"
-                    className={`input ${!isFormValid && !phone && 'invalid-field'}`}
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    onFocus={() => setIsPhoneActive(true)}
-                    onBlur={() => setIsPhoneActive(false)}
-                  />
-                  <label className="label">Mobile nr</label>
-                </div>
-                <div className={`input-wrap ${isTextActive || text ? 'active' : ''}`}>
-                  <textarea
-                    rows="1"
-                    className="input"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    onInput={(e) => {
-                      e.target.style.height = 'auto';
-                      e.target.style.height = `${e.target.scrollHeight + 2}px`;
-                    }}
-                    onFocus={() => setIsTextActive(true)}
-                    onBlur={() => setIsTextActive(false)}
-                  ></textarea>
-                  <label className="label">Text</label>
-                  {!isFormValid && (!name || !email || !phone) && <p className="message">Please fill in all fields</p>}
-                </div>
-                {loading ? (
-                  <div className="spinner spinner_small"></div>
-                ) : (
-                  <button className="btn contact-us__btn" type="submit">
-                    Submit
-                  </button>
-                )}
-              </form>
-            </div>
+            {isFormSended ? (
+              <div className="contact-us__confirmation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="101" viewBox="0 0 100 101" fill="none">
+                  <path d="M16.667 54.6665L37.5003 75.4998L83.3337 29.6665" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+                <h2 className="contact-us__title">Message sent</h2>
+              </div>
+            ) : (
+              <div className="contact-us__form">
+                <h2 className="contact-us__title">Contact us</h2>
+                <form className={isFormValid ? '' : 'invalid'} onSubmit={handleFormSubmit}>
+                  <div className={`input-wrap ${isNameActive || name ? 'active' : ''}`}>
+                    <input
+                      type="text"
+                      className={`input ${!isFormValid && !name && 'invalid-field'}`}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      onFocus={() => setIsNameActive(true)}
+                      onBlur={() => setIsNameActive(false)}
+                    />
+                    <label className="label">Name</label>
+                  </div>
+                  <div className={`input-wrap ${isEmailActive || email ? 'active' : ''}`}>
+                    <input
+                      type="text"
+                      className={`input ${!isFormValid && (!email || !isEmailValid) && 'invalid-field'}`}
+                      value={email}
+                      onChange={(e) => handleEmailChange(e.target.value)}
+                      onFocus={() => setIsEmailActive(true)}
+                      onBlur={() => setIsEmailActive(false)}
+                    />
+                    <label className="label">Email</label>
+                    {!isEmailValid && <p className="message">Please enter a valid email address</p>}
+                  </div>
+                  <div className={`input-wrap ${isPhoneActive || phone ? 'active' : ''}`}>
+                    <input
+                      type="text"
+                      className={`input ${!isFormValid && !phone && 'invalid-field'}`}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      onFocus={() => setIsPhoneActive(true)}
+                      onBlur={() => setIsPhoneActive(false)}
+                    />
+                    <label className="label">Mobile nr</label>
+                  </div>
+                  <div className={`input-wrap ${isTextActive || text ? 'active' : ''}`}>
+                    <textarea
+                      rows="1"
+                      className="input"
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                      onInput={(e) => {
+                        e.target.style.height = 'auto';
+                        e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                      }}
+                      onFocus={() => setIsTextActive(true)}
+                      onBlur={() => setIsTextActive(false)}
+                    ></textarea>
+                    <label className="label">Text</label>
+                    {!isFormValid && (!name || !email || !phone) && <p className="message">Please fill in all fields</p>}
+                  </div>
+                  {loading ? (
+                    <div className="spinner spinner_small"></div>
+                  ) : (
+                    <button className={`btn contact-us__btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
+                      Submit
+                    </button>
+                  )}
+                </form>
+              </div>
+            )}
             <div className="contact-us__img">
               <img src={img3} alt="View" />
               <div className="pantone">

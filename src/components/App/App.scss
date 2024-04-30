@@ -11,29 +11,52 @@
   background: transparent;
   border: none;
   color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  padding: 17px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+  padding: 8px 16px;
   font-family: 'SF Pro Display', sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: 0.36px;
   transition: all 0.3s ease;
-  height: 59px;
-  margin-top: 10px;
+  height: 40px;
   width: 100%;
+  position: absolute;
+  top: 18px;
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.80);
+  }
 
   &-wrap {
     position: relative;
+    min-height: 58px;
+    margin-bottom: 5px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+      min-height: 100px;
+
+      & .label {
+        top: 68px;
+      }
+
+      &.active .label {
+        top: 0;
+      }
+    }
 
     & textarea {
       resize: none;
+      min-height: 82px;
     }
   }
 }
 
 .invalid .invalid-field {
-  border-bottom: 1px solid #bd3333;
+  border-bottom: 1px solid #FF7070;
 }
 
 .label {
@@ -44,7 +67,7 @@
   line-height: 130%;
   letter-spacing: 0.36px;
   position: absolute;
-  top: 28px;
+  top: 26px;
   left: 16px;
   transition: all 0.3s ease;
   pointer-events: none;
@@ -52,7 +75,7 @@
   .active & {
     color: #fff;
     font-size: 14px;
-    top: 5px;
+    top: 0;
     left: 0;
   }
 }
@@ -60,11 +83,10 @@
 .message {
   font-family: 'SF Pro Display', sans-serif;
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
-  line-height: 90%;
-  letter-spacing: -0.48px;
-  margin: 7px 0 0 16px;
+  line-height: 130%;
+  letter-spacing: 0.28px;
   animation: fadeIn 0.3s ease-in;
 }
 
@@ -82,66 +104,23 @@
   color: #0a81f0;
   transition: all 0.3s ease;
 
-  // &.inactive {
-  //   background: #9ae9db;
-  //   color: #ccfbf3;
-  //   cursor: default;
+  &.inactive {
+    background: #F2F2F2;
+    color: #ADC1D3;
+    cursor: default;
 
-  //   &:hover,
-  //   &:active {
-  //     background: #9ae9db;
-  //   }
-  // }
-
-  // &:hover {
-  //   box-shadow: 0px 0px 10px 0px rgba(55, 209, 181, 0.4);
-  // }
-
-  // &:active {
-  //   background: #02ebc1;
-  //   box-shadow: none;
-  // }
-}
-
-.link {
-  font-size: 16px;
-  font-weight: 300;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  color: #92a1a9;
-  position: relative;
-  transition: all 0.3s ease;
-
-  @media screen and (max-width: 1440px) {
-    font-size: 11px;
-    letter-spacing: 0.569px;
-  }
-
-  &::after {
-    display: block;
-    content: '';
-    background: transparent;
-    width: 100%;
-    height: 1px;
-    border-radius: 2px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transition: all 0.3s ease;
-  }
-
-  &:hover::after {
-    background: #92a1a9;
-  }
-
-  &:active,
-  &:focus,
-  &:focus-visible {
-    color: #5e676c;
-
-    &::after {
-      background: #5e676c;
+    &:hover,
+    &:active {
+      background: #F2F2F2;
     }
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.30);
+  }
+
+  &:active {
+    box-shadow: none;
   }
 }
 
