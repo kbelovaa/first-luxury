@@ -324,7 +324,7 @@ const Main = () => {
                   </div>
                   <div className={`input-wrap ${isEmailActive || email ? 'active' : ''}`}>
                     <input
-                      type="text"
+                      type="email"
                       className={`input ${!isFormValid && (!email || !isEmailValid) && 'invalid-field'}`}
                       value={email}
                       onChange={(e) => handleEmailChange(e.target.value)}
